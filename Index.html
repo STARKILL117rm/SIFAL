@@ -1,0 +1,61 @@
+</head>
+<body>
+  <div class="login-container">
+    <h1>Gestor de Clientes SIFAL</h1>
+    <p>Ingrese sus credenciales para acceder al sistema.</p>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" placeholder="Ingrese su usuario" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" required>
+      </div>
+      <div class="form-group">
+        <label for="role">Rol:</label>
+        <select id="role" name="role">
+          <option value="cliente">Cliente</option>
+          <option value="administrador">Administrador</option>
+        </select>
+      </div>
+      <div class="button-group">
+        <button type="submit" id="loginButton">Iniciar Sesión</button>
+        <button type="reset" id="resetButton">Limpiar</button>
+      </div>
+    </form>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Evita el envío real del formulario
+
+      // Obtención de valores y remoción de espacios vacíos
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const role = document.getElementById("role").value;
+      const messageEl = document.getElementById("message");
+
+      // Validación básica
+      if (username === "" || password === "") {
+        messageEl.style.color = "red";
+        messageEl.innerText = "Por favor, complete todos los campos.";
+        return;
+      }
+
+      // Lógica básica de autenticación (aquí se puede integrar con un backend real)
+      if (role === "cliente") {
+        messageEl.style.color = "green";
+        messageEl.innerText = `Bienvenido, Cliente ${username}!`;
+      } else if (role === "administrador") {
+        messageEl.style.color = "green";
+        messageEl.innerText = `Bienvenido, Administrador ${username}!`;
+      } else {
+        messageEl.style.color = "red";
+        messageEl.innerText = "Tipo de usuario no reconocido.";
+      }
+    });
+  </script>
+</body>
+</html>
