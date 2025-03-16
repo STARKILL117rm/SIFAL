@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Cliente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 600px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .buttons button {
+            flex: 1;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .buttons .update {
+            background-color: #28a745;
+        }
+        .buttons .save {
+            background-color: #007bff;
+        }
+        .buttons .cancel {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Registrar Cliente</h1>
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" placeholder="Nombres...">
+        </div>
+        <div class="form-group">
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" placeholder="Apellidos...">
+        </div>
+        <div class="form-group">
+            <label for="regimen">Tipo de Régimen:</label>
+            <select id="regimen">
+                <option>Persona Física</option>
+                <option>Persona Moral</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="nss">NSS:</label>
+            <input type="text" id="nss" placeholder="Número de Seguro Social">
+        </div>
+        <div class="form-group">
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" placeholder="Número de teléfono">
+        </div>
+        <div class="form-group">
+            <label for="rfc">RFC:</label>
+            <input type="text" id="rfc" placeholder="RFC...">
+        </div>
+        <div class="form-group">
+            <label for="afore">AFORE:</label>
+            <input type="text" id="afore" placeholder="AFORE...">
+        </div>
+        <div class="form-group">
+            <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
+            <input type="date" id="fecha-nacimiento">
+        </div>
+        <div class="buttons">
+            <button class="update" onclick="redirectToUpdate()">ACTUALIZAR</button>
+            <button class="save" onclick="showSaveMessage()">GUARDAR</button>
+            <button class="cancel" onclick="showCancelMessage()">CANCELAR</button>
+        </div>
+    </div>
+
+    <script>
+        function redirectToUpdate() {
+            window.location.href = "actualizar_informacion.html";
+        }
+
+        function showSaveMessage() {
+            alert("Información guardada exitosamente.");
+        }
+
+        function showCancelMessage() {
+            alert("Operación cancelada.");
+        }
+    </script>
+</body>
+</html>
