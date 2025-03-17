@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualizar Información</title>
+    <title>Registrar Clientes</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,40 +20,51 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 600px;
+            width: 750px;
+            position: relative;
+            border: 2px solid black;
         }
         h1 {
             text-align: center;
-            color: #333;
+            font-size: 28px;
+            font-weight: bold;
         }
         .form-group {
+            display: flex;
+            align-items: center;
             margin-bottom: 15px;
         }
         .form-group label {
-            display: block;
+            width: 220px;
             font-weight: bold;
-            margin-bottom: 5px;
+            background-color: black;
+            color: white;
+            padding: 8px;
+            text-align: right;
+            border-radius: 5px;
+            margin-right: 10px;
         }
         .form-group input, .form-group select {
-            width: calc(100% - 20px);
-            padding: 10px;
+            flex: 1;
+            padding: 8px;
             border: 1px solid #ccc;
             border-radius: 5px;
             box-sizing: border-box;
         }
         .buttons {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
         }
         .buttons button {
-            flex: 1;
-            padding: 10px 20px;
-            margin: 5px;
+            padding: 12px 20px;
             border: none;
             border-radius: 5px;
             color: white;
             font-size: 16px;
             cursor: pointer;
+            width: 130px;
         }
         .buttons .update {
             background-color: #28a745;
@@ -62,20 +73,32 @@
             background-color: #007bff;
         }
         .buttons .cancel {
-            background-color: #dc3545;
+            background-color: #5c5c5c;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
         }
     </style>
 </head>
 <body>
     <div class="form-container">
-        <h1>Actualizar Información</h1>
+        <button class="close-button" onclick="closeForm()">✖</button>
+        <h1>Registrar Clientes</h1>
         <div class="form-group">
-            <label for="nombre">Nombre:</label>
+            <label for="nombre">Nombre del cliente:</label>
             <input type="text" id="nombre" placeholder="Nombres...">
         </div>
         <div class="form-group">
-            <label for="apellidos">Apellidos:</label>
-            <input type="text" id="apellidos" placeholder="Apellidos...">
+            <label for="apellido-paterno">Apellidos:</label>
+            <input type="text" id="apellido-paterno" placeholder="Paterno...">
+            <input type="text" id="apellido-materno" placeholder="Materno...">
         </div>
         <div class="form-group">
             <label for="regimen">Tipo de Régimen:</label>
@@ -85,39 +108,48 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="nss">NSS:</label>
-            <input type="text" id="nss" placeholder="Número de Seguro Social">
-        </div>
-        <div class="form-group">
-            <label for="telefono">Teléfono:</label>
-            <input type="text" id="telefono" placeholder="Número de teléfono">
-        </div>
-        <div class="form-group">
             <label for="rfc">RFC:</label>
             <input type="text" id="rfc" placeholder="RFC...">
+        </div>
+        <div class="form-group">
+            <label for="nss">Número de Seguro Social (NSS):</label>
+            <input type="text" id="nss" placeholder="NSS...">
         </div>
         <div class="form-group">
             <label for="afore">AFORE:</label>
             <input type="text" id="afore" placeholder="AFORE...">
         </div>
         <div class="form-group">
-            <label for="fecha-nacimiento">Fecha de Nacimiento:</label>
+            <label for="telefono">Número de Teléfono:</label>
+            <input type="text" id="telefono" placeholder="Teléfono...">
+        </div>
+        <div class="form-group">
+            <label for="fecha-nacimiento">Fecha de nacimiento:</label>
             <input type="date" id="fecha-nacimiento">
         </div>
+
         <div class="buttons">
-            <button class="update">ACTUALIZAR</button>
+            <button class="update" onclick="redirectToUpdate()">ACTUALIZAR</button>
             <button class="save" onclick="showSaveMessage()">GUARDAR</button>
             <button class="cancel" onclick="showCancelMessage()">CANCELAR</button>
         </div>
     </div>
 
     <script>
+        function closeForm() {
+            alert("Cerrando formulario...");
+        }
+
+        function redirectToUpdate() {
+            window.location.href = "actualizar_informacion.html";
+        }
+
         function showSaveMessage() {
-            alert("Los cambios han sido guardados con éxito.");
+            alert("Información guardada exitosamente.");
         }
 
         function showCancelMessage() {
-            alert("Actualización cancelada.");
+            alert("Operación cancelada.");
         }
     </script>
 </body>
