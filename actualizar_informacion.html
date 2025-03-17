@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Clientes</title>
+    <title>Actualizar Información</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -90,7 +90,7 @@
 <body>
     <div class="form-container">
         <button class="close-button" onclick="closeForm()">✖</button>
-        <h1>Registrar Clientes</h1>
+        <h1>Actualizar Información</h1>
         <div class="form-group">
             <label for="nombre">Nombre del cliente:</label>
             <input type="text" id="nombre" placeholder="Nombres...">
@@ -127,21 +127,15 @@
             <label for="fecha-nacimiento">Fecha de nacimiento:</label>
             <input type="date" id="fecha-nacimiento">
         </div>
-
         <div class="buttons">
-            <button class="update" onclick="redirectToUpdate()">ACTUALIZAR</button>
+            <button class="update">ACTUALIZAR</button>
             <button class="save" onclick="showSaveMessage()">GUARDAR</button>
             <button class="cancel" onclick="showCancelMessage()">CANCELAR</button>
         </div>
     </div>
-
     <script>
         function closeForm() {
             alert("Cerrando formulario...");
-        }
-
-        function redirectToUpdate() {
-            window.location.href = "actualizar_informacion.html";
         }
 
         function showSaveMessage() {
