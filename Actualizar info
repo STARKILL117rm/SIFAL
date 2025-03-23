@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Información</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 750px;
+            position: relative;
+            border: 2px solid black;
+        }
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            width: 220px;
+            font-weight: bold;
+            background-color: black;
+            color: white;
+            padding: 8px;
+            text-align: right;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .form-group input, .form-group select {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .buttons button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            width: 130px;
+        }
+        .buttons .update {
+            background-color: #28a745;
+        }
+        .buttons .save {
+            background-color: #007bff;
+        }
+        .buttons .cancel {
+            background-color: #5c5c5c;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <button class="close-button" onclick="closeForm()">✖</button>
+        <h1>Actualizar Información</h1>
+        <div class="form-group">
+            <label for="nombre">Nombre del cliente:</label>
+            <input type="text" id="nombre" placeholder="Nombres...">
+        </div>
+        <div class="form-group">
+            <label for="apellido-paterno">Apellidos:</label>
+            <input type="text" id="apellido-paterno" placeholder="Paterno...">
+            <input type="text" id="apellido-materno" placeholder="Materno...">
+        </div>
+        <div class="form-group">
+            <label for="regimen">Tipo de Régimen:</label>
+            <select id="regimen">
+                <option>Persona Física</option>
+                <option>Persona Moral</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rfc">RFC:</label>
+            <input type="text" id="rfc" placeholder="RFC...">
+        </div>
+        <div class="form-group">
+            <label for="nss">Número de Seguro Social (NSS):</label>
+            <input type="text" id="nss" placeholder="NSS...">
+        </div>
+        <div class="form-group">
+            <label for="afore">AFORE:</label>
+            <input type="text" id="afore" placeholder="AFORE...">
+        </div>
+        <div class="form-group">
+            <label for="telefono">Número de Teléfono:</label>
+            <input type="text" id="telefono" placeholder="Teléfono...">
+        </div>
+        <div class="form-group">
+            <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+            <input type="date" id="fecha-nacimiento">
+        </div>
+        <div class="buttons">
+            <button class="update" onclick="showUpdateMessage()">ACTUALIZAR</button>
+            <button class="save" onclick="showSaveMessage()">GUARDAR</button>
+            <button class="cancel" onclick="showCancelMessage()">CANCELAR</button>
+        </div>
+    </div>
+    <script>
+        function closeForm() {
+            alert("Cerrando formulario...");
+        }
+        function showUpdateMessage() {
+            alert("Información actualizada exitosamente.");
+        }
+        function showSaveMessage() {
+            alert("Información guardada exitosamente.");
+        }
+        function showCancelMessage() {
+            alert("Operación cancelada.");
+        }
+    </script>
+</body>
+</html>
