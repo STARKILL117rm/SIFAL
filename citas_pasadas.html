@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Citas Pasadas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+        .panel {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .panel h3 {
+            background: gray;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .info, .history {
+            margin-top: 10px;
+        }
+        .info p, .history div {
+            background: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn-info { background: blue; color: white; }
+        .btn-history { background: black; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="panel">
+            <h3>Nombre del Cliente</h3>
+            <button class="btn btn-info">Ver información del cliente</button>
+            <button class="btn btn-history">Agendar cita o Modificar</button>
+            <div class="info">
+                <p>Nombre: XXXXXXXXXX</p>
+                <p>Edad: XX</p>
+                <p>Tipo de régimen: XXXXXXX</p>
+                <p>AFORE: XXXXX</p>
+                <p>NSS: XXXXXXX</p>
+                <p>RFC: XXXXXXX</p>
+                <p>AFORE ACTUAL: XXXXXXX</p>
+            </div>
+        </div>
+        <div class="panel">
+            <h3>Historial de Citas</h3>
+            <div class="history">
+                <div>Fecha: XX/XX/XXXX | Hora: XX:XX A.M | Tipo: XXXXX</div>
+                <div>Fecha: XX/XX/XXXX | Hora: XX:XX A.M | Tipo: XXXXX</div>
+                <div>Fecha: XX/XX/XXXX | Hora: XX:XX A.M | Tipo: XXXXX</div>
+                <div>Fecha: XX/XX/XXXX | Hora: XX:XX A.M | Tipo: XXXXX</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

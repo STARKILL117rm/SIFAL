@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Cita</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border: 2px solid black;
+            width: 600px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+        }
+        .header {
+            background-color: #d3d3d3;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .buttons-container {
+            margin: 20px 0;
+        }
+        .button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .client-button {
+            background-color: white;
+            border: 1px solid black;
+        }
+        .meeting-form {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .meeting-form label {
+            font-weight: bold;
+        }
+        .meeting-form input, .meeting-form select, .meeting-form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .meeting-form .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .meeting-form .buttons button {
+            flex: 1;
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .save { background-color: blue; }
+        .cancel { background-color: gray; }
+        .modify { background-color: green; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="close-button">✖</button>
+        <div class="header">NOMBRE DEL CLIENTE</div>
+        <div class="buttons-container">
+            <button class="button client-button">Ver datos del cliente</button>
+            <button class="button client-button">Agendar cita o Modificar</button>
+        </div>
+        <h2>Agendar cita</h2>
+        <div class="meeting-form">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha">
+            <label for="hora">Hora:</label>
+            <input type="time" id="hora">
+            <label for="tipo">Tipo de reunión:</label>
+            <select id="tipo">
+                <option>Seleccione el tipo de reunión</option>
+                <option>Presencial</option>
+                <option>Virtual</option>
+            </select>
+            <label for="descripcion">Descripción de la reunión:</label>
+            <textarea id="descripcion" rows="3"></textarea>
+            <div class="buttons">
+                <button class="save">GUARDAR</button>
+                <button class="cancel">CANCELAR</button>
+                <button class="modify">MODIFICAR</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
