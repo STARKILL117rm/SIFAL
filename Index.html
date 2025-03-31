@@ -1,301 +1,144 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Clientes</title>
-    <link rel="icon" href="SIFAL.jpg" type="image/jpeg">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .form-container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 750px;
-            position: relative;
-            border: 2px solid black;
-        }
-        h1 {
-            text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .form-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            width: 220px;
-            font-weight: bold;
-            background-color: black;
-            color: white;
-            padding: 8px;
-            text-align: right;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-        .form-group input, .form-group select {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .buttons button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            width: 130px;
-        }
-        .buttons .update {
-            background-color: #28a745;
-        }
-        .buttons .save {
-            background-color: #007bff;
-        }
-        .buttons .cancel {
-            background-color: #ff0000;
-        }
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor de Clientes SIFAL - Inicio de Sesión</title>
+  <link rel="icon" href="SIFAL.jpg" type="image/jpeg">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-container {
+      background: white;
+      padding: 30px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      width: 320px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+    /* Estilos para el formulario */
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    input[type="text"],
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    /* Estilos para los botones */
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      width: 48%;
+      font-size: 1rem;
+    }
+    #loginButton {
+      background: #007bff;
+    }
+    #loginButton:hover {
+      background: #0056b3;
+    }
+    #resetButton {
+      background: #6c757d;
+    }
+    #resetButton:hover {
+      background: #5a6268;
+    }
+    /* Mensaje de información o error */
+    #message {
+      margin-top: 15px;
+      font-size: 0.9em;
+    }
+  </style>
 </head>
 <body>
-    <div class="form-container">
-        <button class="close-button" onclick="closeForm()">✖</button>
-        <h1>Registrar Clientes</h1>
-        <div class="form-group">
-            <label for="nombre">Nombre del cliente:</label>
-            <input type="text" id="nombre" placeholder="Nombres...">
-        </div>
-        <div class="form-group">
-            <label for="apellido-paterno">Apellidos:</label>
-            <input type="text" id="apellido-paterno" placeholder="Paterno...">
-            <input type="text" id="apellido-materno" placeholder="Materno...">
-        </div>
-        <div class="form-group">
-            <label for="regimen">Tipo de Régimen:</label>
-            <select id="regimen">
-                <option>Persona Física</option>
-                <option>Persona Moral</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="rfc">RFC:</label>
-            <input type="text" id="rfc" placeholder="RFC...">
-        </div>
-        <div class="form-group">
-            <label for="nss">Número de Seguro Social (NSS):</label>
-            <input type="text" id="nss" placeholder="NSS...">
-        </div>
-        <div class="form-group">
-            <label for="afore">AFORE:</label>
-            <input type="text" id="afore" placeholder="AFORE...">
-        </div>
-        <div class="form-group">
-            <label for="telefono">Número de Teléfono:</label>
-            <input type="text" id="telefono" placeholder="Teléfono...">
-        </div>
-        <div class="form-group">
-            <label for="fecha-nacimiento">Fecha de nacimiento:</label>
-            <input type="date" id="fecha-nacimiento">
-        </div>
+  <div class="login-container">
+    <h1>Gestor de Clientes SIFAL</h1>
+    <p>Ingrese sus credenciales para acceder al sistema.</p>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" placeholder="Ingrese su usuario" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" required>
+      </div>
+      <div class="form-group">
+        <label for="role">Rol:</label>
+        <select id="role" name="role">
+          <option value="cliente">Cliente</option>
+          <option value="administrador">Administrador</option>
+        </select>
+      </div>
+      <div class="button-group">
+        <button type="submit" id="loginButton">Iniciar Sesión</button>
+        <button type="reset" id="resetButton">Limpiar</button>
+      </div>
+    </form>
+    <p id="message"></p>
+  </div>
 
-        <div class="buttons">
-            <button class="update" onclick="redirectTo('acutualizar_info.html')">ACTUALIZAR</button>
-            <button class="save" onclick="showSaveMessage()">GUARDAR</button>
-            <button class="cancel" onclick="redirectTo('acciones.html')">CANCELAR</button>
-        </div>
-    </div>
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Evita el envío real del formulario
 
-    <script>
-        function closeForm() {
-            alert("Cerrando formulario...");
-        }
+      // Obtención de valores y remoción de espacios vacíos
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const role = document.getElementById("role").value;
+      const messageEl = document.getElementById("message");
 
-        function showSaveMessage() {
-            alert("Información guardada exitosamente.");
-        }
+      // Validación básica
+      if (username === "" || password === "") {
+        messageEl.style.color = "red";
+        messageEl.innerText = "Por favor, complete todos los campos.";
+        return;
+      }
 
-        
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Clientes</title>
-    <link rel="icon" href="SIFAL.jpg" type="image/jpeg">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .form-container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 750px;
-            position: relative;
-            border: 2px solid black;
-        }
-        h1 {
-            text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .form-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            width: 220px;
-            font-weight: bold;
-            background-color: black;
-            color: white;
-            padding: 8px;
-            text-align: right;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-        .form-group input, .form-group select {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .buttons button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            width: 130px;
-        }
-        .buttons .update {
-            background-color: #28a745;
-        }
-        .buttons .save {
-            background-color: #007bff;
-        }
-        .buttons .cancel {
-            background-color: #ff0000;
-        }
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="form-container">
-        <button class="close-button" onclick="closeForm()">✖</button>
-        <h1>Registrar Clientes</h1>
-        <div class="form-group">
-            <label for="nombre">Nombre del cliente:</label>
-            <input type="text" id="nombre" placeholder="Nombres...">
-        </div>
-        <div class="form-group">
-            <label for="apellido-paterno">Apellidos:</label>
-            <input type="text" id="apellido-paterno" placeholder="Paterno...">
-            <input type="text" id="apellido-materno" placeholder="Materno...">
-        </div>
-        <div class="form-group">
-            <label for="regimen">Tipo de Régimen:</label>
-            <select id="regimen">
-                <option>Persona Física</option>
-                <option>Persona Moral</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="rfc">RFC:</label>
-            <input type="text" id="rfc" placeholder="RFC...">
-        </div>
-        <div class="form-group">
-            <label for="nss">Número de Seguro Social (NSS):</label>
-            <input type="text" id="nss" placeholder="NSS...">
-        </div>
-        <div class="form-group">
-            <label for="afore">AFORE:</label>
-            <input type="text" id="afore" placeholder="AFORE...">
-        </div>
-        <div class="form-group">
-            <label for="telefono">Número de Teléfono:</label>
-            <input type="text" id="telefono" placeholder="Teléfono...">
-        </div>
-        <div class="form-group">
-            <label for="fecha-nacimiento">Fecha de nacimiento:</label>
-            <input type="date" id="fecha-nacimiento">
-        </div>
-
-        <div class="buttons">
-            <button class="update" onclick="redirectTo('acutualizar_info.html')">ACTUALIZAR</button>
-            <button class="save" onclick="showSaveMessage()">GUARDAR</button>
-            <button class="cancel" onclick="redirectTo('acciones.html')">CANCELAR</button>
-        </div>
-    </div>
-
-    <script>
-        function closeForm() {
-            alert("Cerrando formulario...");
-        }
-
-        function showSaveMessage() {
-            alert("Información guardada exitosamente.");
-        }
-
-        
-    </script>
+      // Redirección basada en el rol
+      if (role === "administrador") {
+        window.location.href = "acciones.html"; // Redirige al formulario de registro de clientes
+      } else if (role === "cliente") {
+        messageEl.style.color = "green";
+        messageEl.innerText = `Bienvenido, Cliente ${username}!`;
+      } else {
+        messageEl.style.color = "red";
+        messageEl.innerText = "Tipo de usuario no reconocido.";
+      }
+    });
+  </script>
 </body>
 </html>

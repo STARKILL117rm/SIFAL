@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Clientes</title>
+    <title>Acciones del Administrador</title>
     <link rel="icon" href="SIFAL.jpg" type="image/jpeg">
     <style>
         body {
@@ -65,16 +65,16 @@
             color: white;
             font-size: 16px;
             cursor: pointer;
-            width: 130px;
+            width: 200px;
         }
         .buttons .update {
-            background-color: #28a745;
+            background-color: #000000;
         }
         .buttons .save {
-            background-color: #007bff;
+            background-color: #000000;
         }
         .buttons .cancel {
-            background-color: #ff0000;
+            background-color: #000000;
         }
         .close-button {
             position: absolute;
@@ -91,48 +91,13 @@
 <body>
     <div class="form-container">
         <button class="close-button" onclick="closeForm()">✖</button>
-        <h1>Registrar Clientes</h1>
+        <h1>Acciones de Administrador</h1>
         <div class="form-group">
-            <label for="nombre">Nombre del cliente:</label>
-            <input type="text" id="nombre" placeholder="Nombres...">
         </div>
-        <div class="form-group">
-            <label for="apellido-paterno">Apellidos:</label>
-            <input type="text" id="apellido-paterno" placeholder="Paterno...">
-            <input type="text" id="apellido-materno" placeholder="Materno...">
-        </div>
-        <div class="form-group">
-            <label for="regimen">Tipo de Régimen:</label>
-            <select id="regimen">
-                <option>Persona Física</option>
-                <option>Persona Moral</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="rfc">RFC:</label>
-            <input type="text" id="rfc" placeholder="RFC...">
-        </div>
-        <div class="form-group">
-            <label for="nss">Número de Seguro Social (NSS):</label>
-            <input type="text" id="nss" placeholder="NSS...">
-        </div>
-        <div class="form-group">
-            <label for="afore">AFORE:</label>
-            <input type="text" id="afore" placeholder="AFORE...">
-        </div>
-        <div class="form-group">
-            <label for="telefono">Número de Teléfono:</label>
-            <input type="text" id="telefono" placeholder="Teléfono...">
-        </div>
-        <div class="form-group">
-            <label for="fecha-nacimiento">Fecha de nacimiento:</label>
-            <input type="date" id="fecha-nacimiento">
-        </div>
-
         <div class="buttons">
-            <button class="update" onclick="redirectTo('acutualizar_info.html')">ACTUALIZAR</button>
-            <button class="save" onclick="showSaveMessage()">GUARDAR</button>
-            <button class="cancel" onclick="redirectTo('acciones.html')">CANCELAR</button>
+            <button class="update" onclick="redirectTo('registrar_clientes.html')">Registrar Datos de un Cliente</button>
+            <button class="update" onclick="redirectTo('actualizar_informacion.html')">Actualizar Datos de un Cliente</button>
+            <button class="update" onclick="redirectTo('buscar_cliente.html')">Buscar un Cliente</button>
         </div>
     </div>
 
@@ -141,11 +106,9 @@
             alert("Cerrando formulario...");
         }
 
-        function showSaveMessage() {
-            alert("Información guardada exitosamente.");
+        function redirectTo(page) {
+            window.location.href = page;
         }
-
-        
     </script>
 </body>
 </html>
