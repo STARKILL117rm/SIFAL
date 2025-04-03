@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Pensión</title>
+    <link rel="icon" href="SIFAL.jpg" type="image/jpeg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script> <!-- Librería jsPDF -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .simulator-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 500px;
+            text-align: center;
+            border: 2px solid black;
+        }
+        .simulator-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .simulator-text {
+            font-size: 18px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        .simulator-pension {
+            font-size: 28px;
+            font-weight: bold;
+            color: #17a2b8;
+            margin-bottom: 20px;
+        }
+        .simulator-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .simulator-buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 150px;
+        }
+        .btn-download {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-exit {
+            background-color: #ff0000;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="simulator-container">
+        <h1 class="simulator-title">Simulador de Pensión</h1>
+        <p class="simulator-text">Al retirar, el monto de pensión será de aproximadamente:</p>
+        <p class="simulator-pension" id="pension-monto">$XX, XXX.XXX</p>
+        <p class="simulator-text">El cálculo realizado es considerando un retiro a los <span id="edad-retiro">XX</span> años de edad.</p>
+        <div class="simulator-buttons">
+            <button class="btn-download" onclick="downloadPDF()">DESCARGAR</button>
+            <button class="btn-exit" onclick="closeSimulator(); redirectTo('acciones.html')">SALIR</button>
+        </div>
+    </div>
+
+    <script>
+        function closeSimulator() {
+            alert("Saliendo del simulador...");
+        }
+
+        function redirectTo(page) {
+            window.location.href = page;
+        }
+
+        function downloadPDF() {
+            const pensionMonto = document.getElementById("pension-monto").innerText;
+            const edadRetiro = document.getElementById("edad-retiro").innerText;
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFont("Arial", "bold");
+            doc.text("Simulador de Pensión", 105, 20, { align: "center" });
+            doc.text(`Al retirar, el monto de pensión será de aproximadamente:`, 20, 40);
+            doc.setFont("Arial", "normal");
+            doc.text(`Pensión mensual: ${pensionMonto}`, 20, 50);
+            doc.text(`El cálculo realizado es considerando un retiro a los ${edadRetiro} años de edad.`, 20, 60);
+
+            doc.save("Simulador_Pension.pdf");
+        }
+
+        // Simulación inicial para llenar los valores de ejemplo
+        document.getElementById("pension-monto").innerText = "$25,000.00";
+        document.getElementById("edad-retiro").innerText = "65";
+    </script>
+</body>
+</html>
