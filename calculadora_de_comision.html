@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Comisión</title>
+    <link rel="icon" href="SIFAL.jpg" type="image/jpeg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .calculator-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 550px;
+            text-align: center;
+            border: 2px solid black;
+        }
+        .calculator-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .calculator-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .calculator-group label {
+            width: 200px;
+            font-weight: bold;
+            background-color: black;
+            color: white;
+            padding: 8px;
+            text-align: right;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .calculator-group input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .result {
+            font-size: 28px;
+            font-weight: bold;
+            color: #17a2b8;
+            margin: 20px 0;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .buttons button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            width: 130px;
+        }
+        .buttons .modify {
+            background-color: #ffc107;
+        }
+        .buttons .save {
+            background-color: #28a745;
+        }
+        .buttons .cancel {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1 class="calculator-title">Calculadora de Comisión</h1>
+        <div class="calculator-group">
+            <label for="nombre-cliente">Nombre del cliente:</label>
+            <input type="text" id="nombre-cliente" placeholder="Ingrese nombre...">
+        </div>
+        <div class="calculator-group">
+            <label for="monto-retirar">Monto a retirar:</label>
+            <input type="number" id="monto-retirar" placeholder="Ingrese monto...">
+        </div>
+        <div class="calculator-group">
+            <label for="porcentaje-comision">Porcentaje de comisión:</label>
+            <input type="number" id="porcentaje-comision" placeholder="Ingrese porcentaje...">
+        </div>
+        <p class="calculator-title">Monto total con el descuento</p>
+        <p class="result" id="monto-total">$00.000.00</p>
+        <div class="buttons">
+            <button class="modify" onclick="redirectTo('modificar_datos.html')">MODIFICAR</button>
+            <button class="save" onclick="saveData()">GUARDAR</button>
+            <button class="cancel" onclick="redirectTo('acciones.html')">CANCELAR</button>
+        </div>
+    </div>
+
+    <script>
+        function redirectTo(page) {
+            window.location.href = page;
+        }
+
+        function saveData() {
+            const nombre = document.getElementById("nombre-cliente").value;
+            const montoRetirar = parseFloat(document.getElementById("monto-retirar").value);
+            const porcentajeComision = parseFloat(document.getElementById("porcentaje-comision").value);
+
+            if (!nombre || isNaN(montoRetirar) || isNaN(porcentajeComision)) {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+
+            const descuento = (montoRetirar * porcentajeComision) / 100;
+            const montoTotal = (montoRetirar - descuento).toFixed(2);
+
+            document.getElementById("monto-total").innerText = `$${montoTotal}`;
+            alert("Datos guardados exitosamente.");
+        }
+    </script>
+</body>
+</html>
