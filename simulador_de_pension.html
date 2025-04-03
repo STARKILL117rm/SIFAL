@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Clientes</title>
+    <title>Simulador de Pensión</title>
     <link rel="icon" href="SIFAL.jpg" type="image/jpeg">
     <style>
         body {
@@ -38,7 +38,7 @@
             margin-right: 10px;
         }
         .header img {
-            height: 28px; /* Ajusta la altura de la imagen al tamaño del texto */
+            height: 28px;
             width: auto;
         }
         .form-group {
@@ -78,14 +78,18 @@
             cursor: pointer;
             width: 130px;
         }
-        .buttons .update {
-            background-color: #28a745;
+        .buttons .calculate {
+            background-color: #17a2b8;
         }
-        .buttons .save {
-            background-color: #007bff;
+        .buttons .reset {
+            background-color: #6c757d;
         }
         .buttons .cancel {
             background-color: #ff0000;
+        }
+        .buttons .edit {
+            background-color: #d9ff00;
+            color: black;
         }
         .close-button {
             position: absolute;
@@ -103,50 +107,38 @@
     <div class="form-container">
         <button class="close-button" onclick="closeForm()">✖</button>
         <div class="header">
-            <h1>Registrar Clientes</h1>
+            <h1>Simulador de Pensión</h1>
             <img src="Imagen SIFAL.jpg" alt="Icono de SIFAL">
         </div>
         <div class="form-group">
-            <label for="nombre">Nombre del cliente:</label>
-            <input type="text" id="nombre" placeholder="Nombres...">
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" placeholder="Edad...">
         </div>
         <div class="form-group">
-            <label for="apellido-paterno">Apellidos:</label>
-            <input type="text" id="apellido-paterno" placeholder="Paterno...">
-            <input type="text" id="apellido-materno" placeholder="Materno...">
+            <label for="salario">Salario mensual:</label>
+            <input type="number" id="salario" placeholder="Salario mensual...">
         </div>
         <div class="form-group">
-            <label for="regimen">Tipo de Régimen:</label>
-            <select id="regimen">
-                <option>Persona Física</option>
-                <option>Persona Moral</option>
+            <label for="saldo-afore">Saldo en AFORE:</label>
+            <input type="number" id="saldo-afore" placeholder="Saldo actual en AFORE...">
+        </div>
+        <div class="form-group">
+            <label for="anio-ley">Año de Ley:</label>
+            <input type="number" id="anio-ley" placeholder="Ejemplo: 1997">
+        </div>
+        <div class="form-group">
+            <label for="genero">Género:</label>
+            <select id="genero" name="genero">
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
             </select>
         </div>
-        <div class="form-group">
-            <label for="rfc">RFC:</label>
-            <input type="text" id="rfc" placeholder="RFC...">
-        </div>
-        <div class="form-group">
-            <label for="nss">Número de Seguro Social (NSS):</label>
-            <input type="text" id="nss" placeholder="NSS...">
-        </div>
-        <div class="form-group">
-            <label for="afore">AFORE:</label>
-            <input type="text" id="afore" placeholder="AFORE...">
-        </div>
-        <div class="form-group">
-            <label for="telefono">Número de Teléfono:</label>
-            <input type="text" id="telefono" placeholder="Teléfono...">
-        </div>
-        <div class="form-group">
-            <label for="fecha-nacimiento">Fecha de nacimiento:</label>
-            <input type="date" id="fecha-nacimiento">
-        </div>
-
         <div class="buttons">
-            <button class="update" onclick="redirectTo('acutualizar_info.html')">ACTUALIZAR</button>
-            <button class="save" onclick="showSaveMessage()">GUARDAR</button>
+            <button class="calculate" onclick="calculatePension()">CALCULAR</button>
+            <button class="reset" onclick="resetForm()">REINICIAR</button>
             <button class="cancel" onclick="redirectTo('acciones.html')">CANCELAR</button>
+            <button class="edit" onclick="redirectTo('modificar_datos_de_simulacion.html')">EDITAR</button>
         </div>
     </div>
 
@@ -155,12 +147,33 @@
             alert("Cerrando formulario...");
         }
 
-        function showSaveMessage() {
-            alert("Información guardada exitosamente.");
+        function resetForm() {
+            document.getElementById("edad").value = "";
+            document.getElementById("salario").value = "";
+            document.getElementById("saldo-afore").value = "";
+            document.getElementById("anio-ley").value = "";
+            document.getElementById("genero").value = "";
         }
 
         function redirectTo(page) {
             window.location.href = page;
+        }
+
+        function calculatePension() {
+            const edad = parseInt(document.getElementById("edad").value);
+            const salario = parseFloat(document.getElementById("salario").value);
+            const saldoAfore = parseFloat(document.getElementById("saldo-afore").value);
+            const anioLey = parseInt(document.getElementById("anio-ley").value);
+
+            if (!edad || !salario || !saldoAfore || !anioLey) {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+
+            let pensionEstimada = (saldoAfore * 0.04) + (salario * 0.2);
+            pensionEstimada = pensionEstimada.toFixed(2);
+
+            alert(`Pensión estimada: $${pensionEstimada} MXN`);
         }
     </script>
 </body>
