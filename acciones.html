@@ -25,36 +25,25 @@
             position: relative;
             border: 2px solid black;
         }
-        h1 {
-            text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .form-group {
+        .header {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
         }
-        .form-group label {
-            width: 220px;
+        .header h1 {
+            font-size: 28px;
             font-weight: bold;
-            background-color: black;
-            color: white;
-            padding: 8px;
-            text-align: right;
-            border-radius: 5px;
+            margin: 0;
             margin-right: 10px;
         }
-        .form-group input, .form-group select {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
+        .header img {
+            height: 28px; /* Ajusta la altura de la imagen al tamaño del texto */
+            width: auto;
         }
         .buttons {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             margin-top: 20px;
         }
@@ -65,15 +54,6 @@
             color: white;
             font-size: 16px;
             cursor: pointer;
-            width: 200px;
-        }
-        .buttons .update {
-            background-color: #000000;
-        }
-        .buttons .save {
-            background-color: #000000;
-        }
-        .buttons .cancel {
             background-color: #000000;
         }
         .close-button {
@@ -91,13 +71,27 @@
 <body>
     <div class="form-container">
         <button class="close-button" onclick="closeForm()">✖</button>
-        <h1>Acciones de Administrador</h1>
-        <div class="form-group">
+        <div class="header">
+            <h1>Acciones del Administrador</h1>
+            <img src="Imagen SIFAL.jpg" alt="Icono de SIFAL">
         </div>
         <div class="buttons">
-            <button class="update" onclick="redirectTo('registrar_clientes.html')">Registrar Datos de un Cliente</button>
-            <button class="update" onclick="redirectTo('actualizar_informacion.html')">Actualizar Datos de un Cliente</button>
-            <button class="update" onclick="redirectTo('buscar_cliente.html')">Buscar un Cliente</button>
+            <button onclick="redirectTo('registrar_clientes.html')">Registrar Datos de un Cliente</button>
+            <button onclick="redirectTo('actualizar_informacion.html')">Actualizar Datos de un Cliente</button>
+            <button onclick="redirectTo('eliminar_cliente.html')">Eliminar a un Cliente</button>
+            <button onclick="redirectTo('buscar_cliente.html')">Buscar un Cliente</button>
+            <button onclick="redirectTo('reuniones.html')">Agendar una cita</button>
+            <button onclick="redirectTo('modificar.html')">Editar Hora y Fecha de una Cita</button>
+            <button onclick="redirectTo('cancelar_citas.html')">Cancelar una cita</button>
+            <button onclick="redirectTo('citas_pasadas.html')">Ver Historial de Citas Pasadas</button>
+            <button onclick="redirectTo('filtrar_citas.html')">Filtrar Citas  por Tipo</button>
+            <button onclick="redirectTo('simulacion_de_pension.html')">Ingresar Datos para Simulacion</button>
+            <button onclick="redirectTo('modificar_datos_de_simulacion.html')">Modificar Datos de Simulacion</button>
+            <button onclick="redirectTo('descargar_archivo.html')">Descargar Simulacion en un Archivo</button>
+            <button onclick="redirectTo('calculadora_de_comision.html')">Calcular Comision por Retiro de AFORE</button>
+            <button onclick="redirectTo('clientes_asesorados.html')">Ver Cantidad de Clientes Asesorados</button>
+            <button onclick="redirectTo('cambios_AFORE.html')">Revisar cambios de AFORE</button>
+            <button onclick="redirectTo('consultar_clientes.html')">Consultar Clientes en Seguimiento</button>
         </div>
     </div>
 

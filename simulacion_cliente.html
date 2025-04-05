@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Pensión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .simulator-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 600px;
+            text-align: center;
+            border: 2px solid black;
+        }
+        .simulator-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .simulator-form {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .simulator-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .simulator-buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-modificar {
+            background-color: #ffc107;
+            color: black;
+        }
+        .btn-calcular {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-cancelar {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="simulator-container">
+        <h1 class="simulator-title">Simulador de Pensión</h1>
+        <form class="simulator-form">
+            <div class="form-group">
+                <label for="nombre">Nombre del cliente:</label>
+                <input type="text" id="nombre" placeholder="Ingrese nombre...">
+            </div>
+            <div class="form-group">
+                <label for="lugar-cotiza">Lugar donde cotiza:</label>
+                <select id="lugar-cotiza">
+                    <option value="imss">IMSS</option>
+                    <option value="issste">ISSSTE</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="anio-ley">Año de Ley:</label>
+                <input type="number" id="anio-ley" placeholder="Ejemplo: 1997">
+            </div>
+            <div class="form-group">
+                <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+                <input type="date" id="fecha-nacimiento">
+            </div>
+            <div class="form-group">
+                <label for="edad">Edad:</label>
+                <input type="number" id="edad" placeholder="Ingrese edad...">
+            </div>
+            <div class="form-group">
+                <label for="saldo-afore">Saldo actual en AFORE:</label>
+                <input type="number" id="saldo-afore" placeholder="Ingrese saldo actual...">
+            </div>
+            <div class="form-group">
+                <label for="genero">Género:</label>
+                <select id="genero">
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="salario-mensual">Salario mensual:</label>
+                <input type="number" id="salario-mensual" placeholder="Ingrese salario mensual...">
+            </div>
+        </form>
+        <div class="simulator-buttons">
+            <button class="btn-modificar" onclick="modificarDatos()">MODIFICAR</button>
+            <button class="btn-calcular" onclick="calcularPension()">CALCULAR</button>
+            <button class="btn-cancelar" onclick="cancelarOperacion()">CANCELAR</button>
+        </div>
+    </div>
+
+    <script>
+        function modificarDatos() {
+            alert("Función para modificar datos aún no implementada.");
+        }
+
+        function calcularPension() {
+            const saldoAfore = parseFloat(document.getElementById("saldo-afore").value);
+            const salarioMensual = parseFloat(document.getElementById("salario-mensual").value);
+
+            if (isNaN(saldoAfore) || isNaN(salarioMensual)) {
+                alert("Por favor, completa todos los campos correctamente.");
+                return;
+            }
+
+            const pensionEstimada = (saldoAfore * 0.04) + (salarioMensual * 0.2);
+            alert(`Pensión estimada: $${pensionEstimada.toFixed(2)} MXN`);
+        }
+
+        function cancelarOperacion() {
+            alert("Operación cancelada.");
+        }
+    </script>
+</body>
+</html>

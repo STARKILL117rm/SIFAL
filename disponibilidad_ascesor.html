@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Disponibilidad del Asesor</title>
+    <link rel="icon" href="SIFAL.jpg" type="image/jpeg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .section {
+            margin-bottom: 15px;
+        }
+        .section button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .btn-consultar {
+            background-color: #007bff;
+        }
+        .btn-agendar {
+            background-color: #ffc107;
+            color: black;
+        }
+        .form-container {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .form-buttons button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-cancelar {
+            background-color: #6c757d;
+            color: white;
+        }
+        .btn-guardar {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Hu21 - Ver Disponibilidad del Asesor</h1>
+        </div>
+        <div class="section">
+            <button class="btn-consultar">Consultar mis datos</button>
+            <button class="btn-agendar">Agendar cita o Cambiar la fecha</button>
+        </div>
+        <div class="form-container">
+            <h2>Agendar Cita</h2>
+            <form>
+                <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" required>
+                </div>
+                <div class="form-group">
+                    <label for="tipo-reunion">Tipo de Reunión:</label>
+                    <select id="tipo-reunion" required>
+                        <option value="asesoria">Asesoría</option>
+                        <option value="revision">Revisión de Documentos</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="btn-cancelar">Cancelar</button>
+                    <button type="submit" class="btn-guardar">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

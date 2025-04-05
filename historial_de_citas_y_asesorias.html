@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Historial</title>
+    <link rel="icon" href="SIFAL.jpg" type="image/jpeg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 800px;
+            margin-bottom: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+            color: #000000;
+        }
+        .section button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .section button.consultar {
+            background-color: #28a745;
+        }
+        .section button.agendar {
+            background-color: #ffc107;
+        }
+        .data-table {
+            margin-top: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Hu18 - Consultar Historial de Citas y Asesorías</h1>
+        </div>
+        <div class="section">
+            <h2>Mi Información</h2>
+            <button class="consultar">Consultar Mis Datos</button>
+            <button class="agendar">Agendar Cita o Modificar</button>
+            <table>
+                <tr>
+                    <th>Nombre</th>
+                    <td>Juan Pérez</td>
+                </tr>
+                <tr>
+                    <th>Edad</th>
+                    <td>35</td>
+                </tr>
+                <tr>
+                    <th>Tipo de Régimen</th>
+                    <td>Persona Física</td>
+                </tr>
+                <tr>
+                    <th>NSS</th>
+                    <td>123456789</td>
+                </tr>
+                <tr>
+                    <th>RFC</th>
+                    <td>ABC123456</td>
+                </tr>
+            </table>
+            <button class="consultar">Consultar Mi Historial de Asesorías</button>
+        </div>
+        <div class="section">
+            <h2>Historial de Citas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Tipo de Cita</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>12/03/2023</td>
+                        <td>10:00 A.M.</td>
+                        <td>Asesoría Fiscal</td>
+                    </tr>
+                    <tr>
+                        <td>15/03/2023</td>
+                        <td>02:00 P.M.</td>
+                        <td>Revisión de Documentos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

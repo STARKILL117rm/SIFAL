@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Cita</title>
+    <link rel="icon" href="SIFAL.jpg" type="image/jpeg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-consultar {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-agendar {
+            background-color: #ffc107;
+            color: black;
+        }
+        .appointment-settings {
+            margin-bottom: 20px;
+        }
+        .appointment-settings label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .appointment-settings input, .appointment-settings select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        .actions button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-modificar {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-cancelar {
+            background-color: #6c757d;
+            color: white;
+        }
+        .btn-guardar {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Nombre del Cliente</h1>
+        </div>
+        <div class="buttons">
+            <button class="btn-consultar">Consultar mis datos</button>
+            <button class="btn-agendar">Agendar cita o Cambiar la fecha</button>
+        </div>
+        <div class="appointment-settings">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha">
+            <label for="hora">Hora:</label>
+            <input type="time" id="hora">
+            <label for="tipo-reunion">Seleccione el tipo de reunión:</label>
+            <select id="tipo-reunion">
+                <option value="asesoria">Asesoría</option>
+                <option value="revision">Revisión de documentos</option>
+                <option value="otro">Otro</option>
+            </select>
+        </div>
+        <div class="actions">
+            <button class="btn-modificar">MODIFICAR</button>
+            <button class="btn-cancelar">CANCELAR</button>
+            <button class="btn-guardar">GUARDAR</button>
+        </div>
+    </div>
+</body>
+</html>
