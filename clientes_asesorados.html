@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes Asesorados</title>
+    <link rel="icon" href="SIFAL.jpg" type="image/jpeg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 800px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .actions button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-retirar {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn-agregar {
+            background-color: #28a745;
+            color: white;
+        }
+        .filters {
+            margin-bottom: 20px;
+        }
+        .filters label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .filters input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .filter-options {
+            margin: 10px 0;
+        }
+        .filter-options label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .filter-options input {
+            margin-right: 10px;
+        }
+        .results {
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Hu15 - Ver cantidad de clientes asesorados</h1>
+        </div>
+        <div class="actions">
+            <button class="btn-retirar" onclick="retirarCliente()">Retirar</button>
+            <button class="btn-agregar" onclick="agregarCliente()">Agregar</button>
+        </div>
+        <div class="filters">
+            <label for="buscar">Ingrese NSS o RFC:</label>
+            <input type="text" id="buscar" placeholder="Buscar cliente...">
+            <div class="filter-options">
+                <label><input type="radio" name="filter" value="completadas"> Asesorías completadas</label>
+                <label><input type="radio" name="filter" value="afore"> Cambios de AFORE</label>
+                <label><input type="radio" name="filter" value="seguimiento"> En seguimiento</label>
+            </div>
+        </div>
+        <div class="results">
+            Total de resultados filtrados: <span id="total-resultados">0</span>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>NSS</th>
+                        <th>RFC</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-clientes">
+                    <!-- Filas dinámicas se agregarán aquí -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function retirarCliente() {
+            alert("Función de retiro aún no implementada.");
+        }
+
+        function agregarCliente() {
+            alert("Función de agregar aún no implementada.");
+        }
+
+        // Ejemplo de generación dinámica de resultados
+        const clientes = [
+            { cliente: "Nombre completo 1", nss: "123456789", rfc: "ABC123456" },
+            { cliente: "Nombre completo 2", nss: "987654321", rfc: "XYZ987654" },
+        ];
+
+        function cargarTabla() {
+            const tabla = document.getElementById("tabla-clientes");
+            tabla.innerHTML = "";
+
+            clientes.forEach(cliente => {
+                const fila = document.createElement("tr");
+                fila.innerHTML = `
+                    <td>${cliente.cliente}</td>
+                    <td>${cliente.nss}</td>
+                    <td>${cliente.rfc}</td>
+                `;
+                tabla.appendChild(fila);
+            });
+
+            document.getElementById("total-resultados").innerText = clientes.length;
+        }
+
+        cargarTabla(); // Cargar datos al inicio
+    </script>
+</body>
+</html>
