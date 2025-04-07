@@ -31,7 +31,6 @@
       color: #666;
       margin-bottom: 20px;
     }
-    /* Estilos para el formulario */
     .form-group {
       margin-bottom: 15px;
       text-align: left;
@@ -50,7 +49,6 @@
       border-radius: 4px;
       box-sizing: border-box;
     }
-    /* Estilos para los botones */
     .button-group {
       display: flex;
       justify-content: space-between;
@@ -76,7 +74,6 @@
     #resetButton:hover {
       background: #ff0000;
     }
-    /* Mensaje de información o error */
     #message {
       margin-top: 15px;
       font-size: 0.9em;
@@ -114,27 +111,23 @@
 
   <script>
     document.getElementById("loginForm").addEventListener("submit", function(event) {
-      event.preventDefault(); // Evita el envío real del formulario
+      event.preventDefault();
 
-      // Obtención de valores y remoción de espacios vacíos
       const username = document.getElementById("username").value.trim();
       const password = document.getElementById("password").value.trim();
       const role = document.getElementById("role").value;
       const messageEl = document.getElementById("message");
 
-      // Validación básica
       if (username === "" || password === "") {
         messageEl.style.color = "red";
         messageEl.innerText = "Por favor, complete todos los campos.";
         return;
       }
 
-      // Redirección basada en el rol
       if (role === "administrador") {
-        window.location.href = "acciones.html"; // Redirige al formulario de registro de clientes
+        window.location.href = "acciones.html";
       } else if (role === "cliente") {
-        messageEl.style.color = "green";
-        messageEl.innerText = `Bienvenido, Cliente ${username}!`;
+        window.location.href = "acciones_cliente.html";
       } else {
         messageEl.style.color = "red";
         messageEl.innerText = "Tipo de usuario no reconocido.";
