@@ -63,10 +63,10 @@
       font-size: 1rem;
     }
     #loginButton {
-      background: #06e02a;
+      background: #0690e0;
     }
     #loginButton:hover {
-      background: #06e02a;
+      background: #0690e0;
     }
     #resetButton {
       background: #ff0000;
@@ -84,8 +84,7 @@
   <div class="login-container">
     <h1>Gestor de Clientes SIFAL</h1>
     <img src="Imagen SIFAL.jpg" alt="Icono de SIFAL">
-    <p>Ingrese sus credenciales para acceder al sistema.</p>
-    <form id="loginForm">
+    <form id="loginForm" method="POST" action="login.php">
       <div class="form-group">
         <label for="username">Usuario:</label>
         <input type="text" id="username" name="username" placeholder="Ingrese su usuario" required>
@@ -106,8 +105,7 @@
         <button type="reset" id="resetButton">Limpiar</button>
       </div>
     </form>
-    <p id="message"></p>
-  </div>
+    
 
   <script>
     document.getElementById("loginForm").addEventListener("submit", function(event) {
