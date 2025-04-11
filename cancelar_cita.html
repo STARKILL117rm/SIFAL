@@ -82,20 +82,26 @@
             <h2>Confirmación</h2>
             <p>Está seguro que desea cancelar la cita</p>
         </div>
-        <div class="buttons">
-            <button class="btn-aceptar" onclick="cancelarCita()">ACEPTAR</button>
-            <button class="btn-cancelar" onclick="cerrarDialogo()">CANCELAR</button>
-        </div>
+        <form action="cancelar_cita.php" method="POST">
+            <input type="hidden" name="id_cita" value="123"> <!-- cambia el 123 por el ID real -->
+            <div class="buttons">
+                <button type="submit" class="btn-aceptar">ACEPTAR</button>
+                <button type="button" class="btn-cancelar" onclick="cerrarDialogo()">CANCELAR</button>
+            </div>
+        </form>        
     </div>
-
     <script>
-        function cancelarCita() {
-            alert("La cita ha sido cancelada exitosamente.");
-        }
-
-        function cerrarDialogo() {
-            alert("El diálogo ha sido cerrado.");
-        }
-    </script>
+        window.addEventListener("DOMContentLoaded", () => {
+          const params = new URLSearchParams(window.location.search);
+          const idCita = params.get("id");
+          if (idCita) {
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "id_cita";
+            input.value = idCita;
+            document.querySelector("form").prepend(input);
+          }
+        });
+      </script>      
 </body>
 </html>
