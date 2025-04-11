@@ -69,8 +69,23 @@
 <body>
     <div class="simulator-container">
         <h1 class="simulator-title">Simulador de Pensión</h1>
+        <p class="simulator-text">Completa tus datos para calcular tu pensión estimada:</p>
+        <div class="simulator-group">
+            <label for="ingreso">Ingreso mensual promedio:</label>
+            <input type="number" id="ingreso" placeholder="$" />
+        </div>
+        <div class="simulator-group">
+            <label for="anios">Años cotizados:</label>
+            <input type="number" id="anios" placeholder="Ej. 25" />
+        </div>
+        <div class="simulator-group">
+            <label for="edad">Edad de retiro:</label>
+            <input type="number" id="edad" placeholder="Ej. 65" />
+        </div>
+        <button class="btn-download" onclick="calcularPension()">CALCULAR</button>
         <p class="simulator-text">Al retirar, el monto de pensión será de aproximadamente:</p>
         <p class="simulator-pension" id="pension-monto">$XX, XXX.XXX</p>
+
         <p class="simulator-text">El cálculo realizado es considerando un retiro a los <span id="edad-retiro">XX</span> años de edad.</p>
         <div class="simulator-buttons">
             <button class="btn-download" onclick="downloadPDF()">DESCARGAR</button>
@@ -79,34 +94,63 @@
     </div>
 
     <script>
+        function calcularPension() {
+            const ingreso = parseFloat(document.getElementById("ingreso").value);
+            const anios = parseInt(document.getElementById("anios").value);
+            const edad = parseInt(document.getElementById("edad").value);
+    
+            if (isNaN(ingreso) || isNaN(anios) || isNaN(edad)) {
+                alert("Por favor completa todos los campos.");
+                return;
+            }
+    
+            // 🧮 Aplicar fórmula de tasa de reemplazo:
+            let tasa = 0.3;
+            if (anios >= 30) tasa = 0.7;
+            else if (anios >= 25) tasa = 0.6;
+            else if (anios >= 20) tasa = 0.5;
+            else if (anios >= 15) tasa = 0.4;
+            else if (anios >= 10) tasa = 0.3;
+    
+            const pension = (ingreso * tasa).toFixed(2);
+    
+            document.getElementById("pension-monto").innerText = `$${pension}`;
+            document.getElementById("edad-retiro").innerText = edad;
+        }
+    
+        function downloadPDF() {
+            const ingreso = document.getElementById("ingreso").value;
+            const anios = document.getElementById("anios").value;
+            const edad = document.getElementById("edad").value;
+            const monto = document.getElementById("pension-monto").innerText;
+    
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+    
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(16);
+            doc.text("Simulación de Pensión", 105, 20, { align: "center" });
+    
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(12);
+            doc.text(`Ingreso mensual promedio: $${ingreso}`, 20, 40);
+            doc.text(`Años cotizados: ${anios}`, 20, 50);
+            doc.text(`Edad estimada de retiro: ${edad}`, 20, 60);
+            doc.text(`Pensión estimada mensual: ${monto}`, 20, 80);
+    
+            doc.setFont("helvetica", "italic");
+            doc.text("Este cálculo es aproximado y puede variar según factores oficiales.", 20, 100);
+    
+            doc.save("simulacion_pension.pdf");
+        }
+    
         function closeSimulator() {
             alert("Saliendo del simulador...");
         }
-
+    
         function redirectTo(page) {
             window.location.href = page;
         }
-
-        function downloadPDF() {
-            const pensionMonto = document.getElementById("pension-monto").innerText;
-            const edadRetiro = document.getElementById("edad-retiro").innerText;
-
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-
-            doc.setFont("Arial", "bold");
-            doc.text("Simulador de Pensión", 105, 20, { align: "center" });
-            doc.text(`Al retirar, el monto de pensión será de aproximadamente:`, 20, 40);
-            doc.setFont("Arial", "normal");
-            doc.text(`Pensión mensual: ${pensionMonto}`, 20, 50);
-            doc.text(`El cálculo realizado es considerando un retiro a los ${edadRetiro} años de edad.`, 20, 60);
-
-            doc.save("Simulador_Pension.pdf");
-        }
-
-        // Simulación inicial para llenar los valores de ejemplo
-        document.getElementById("pension-monto").innerText = "$25,000.00";
-        document.getElementById("edad-retiro").innerText = "65";
-    </script>
+    </script>    
 </body>
 </html>
