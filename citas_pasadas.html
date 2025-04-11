@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ver Citas Pasadas</title>
-    <link rel="icon" href="SIFAL.jpg" type="image/jpeg">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -60,26 +59,48 @@
         <div class="panel">
             <h3>Nombre del Cliente</h3>
             <button class="btn btn-info">Ver información del cliente</button>
-            <button class="btn btn-history">Agendar cita o Modificar</button>
-            <div class="info">
-                <p>Nombre: XXXXXXXXXX</p>
-                <p>Edad: XX</p>
-                <p>Tipo de régimen: XXXXXXX</p>
-                <p>AFORE: XXXXX</p>
-                <p>NSS: XXXXXXX</p>
-                <p>RFC: XXXXXXX</p>
-                <p>AFORE ACTUAL: XXXXXXX</p>
-            </div>
+            <div class="info" id="info-container"></div>
         </div>
         <div class="panel">
             <h3>Historial de Citas</h3>
-            <div class="history">
-                <div>Fecha: XX/XX/XXXX | Hora: XX:XX A.M | Tipo: XXXXX</div>
-                <div>Fecha: XX/XX/XXXX | Hora: XX:XX A.M | Tipo: XXXXX</div>
-                <div>Fecha: XX/XX/XXXX | Hora: XX:XX A.M | Tipo: XXXXX</div>
-                <div>Fecha: XX/XX/XXXX | Hora: XX:XX A.M | Tipo: XXXXX</div>
+            <div class="history" id="history-container">
+                <!-- Historial dinámico -->
             </div>
         </div>
     </div>
+
+    <script>
+        // Fetch datos desde PHP
+        fetch('citas.php')
+            .then(response => response.json())
+            .then(data => {
+                const infoContainer = document.getElementById('info-container');
+                const historyContainer = document.getElementById('history-container');
+
+                // Mostrar información del cliente
+                if (data.length > 0) {
+                    const cliente = data[0];
+                    infoContainer.innerHTML = `
+                        <p>Nombre: ${cliente.cliente_nombre}</p>
+                        <p>Edad: ${cliente.edad}</p>
+                        <p>Tipo de régimen: ${cliente.regimen}</p>
+                        <p>AFORE: ${cliente.afore_actual}</p>
+                        <p>NSS: ${cliente.nss}</p>
+                        <p>RFC: ${cliente.rfc}</p>
+                    `;
+
+                    // Mostrar historial de citas
+                    data.forEach(cita => {
+                        const citaElement = document.createElement('div');
+                        citaElement.textContent = `Fecha: ${cita.fecha_cita} | Hora: ${cita.hora_cita} | Tipo: ${cita.tipo_cita}`;
+                        historyContainer.appendChild(citaElement);
+                    });
+                } else {
+                    infoContainer.innerHTML = '<p>No hay información disponible.</p>';
+                    historyContainer.innerHTML = '<p>No hay citas pasadas.</p>';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
 </body>
 </html>
