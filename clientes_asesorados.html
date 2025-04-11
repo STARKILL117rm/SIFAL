@@ -139,38 +139,90 @@
     </div>
 
     <script>
+        let selectedRFC = null;
         function retirarCliente() {
-            alert("Función de retiro aún no implementada.");
+    const filtro = document.querySelector('input[name="filter"]:checked')?.value;
+    if (!selectedRFC || !filtro) {
+        alert("Selecciona un cliente y un filtro.");
+        return;
+    }
+
+    fetch("actualizar_estado_cliente.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `rfc=${encodeURIComponent(selectedRFC)}&campo=${filtro}&accion=0`
+    })
+    .then(res => res.text())
+    .then(res => {
+        if (res === "ok") {
+            alert("Cliente retirado correctamente.");
+            cargarClientes();
+        } else {
+            alert("Error: " + res);
         }
+    });
+}
 
-        function agregarCliente() {
-            alert("Función de agregar aún no implementada.");
+function agregarCliente() {
+    const filtro = document.querySelector('input[name="filter"]:checked')?.value;
+    if (!selectedRFC || !filtro) {
+        alert("Selecciona un cliente y un filtro.");
+        return;
+    }
+
+    fetch("actualizar_estado_cliente.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `rfc=${encodeURIComponent(selectedRFC)}&campo=${filtro}&accion=1`
+    })
+    .then(res => res.text())
+    .then(res => {
+        if (res === "ok") {
+            alert("Cliente actualizado correctamente.");
+            cargarClientes();
+        } else {
+            alert("Error: " + res);
         }
+    });
+}   
+        function cargarClientes() {
+            const buscar = document.getElementById("buscar").value;
+            const filtro = document.querySelector('input[name="filter"]:checked')?.value || "";
+    
+            fetch(`ver_clientes_asesorados.php?buscar=${encodeURIComponent(buscar)}&filtro=${encodeURIComponent(filtro)}`)
+                .then(res => res.json())
+                .then(clientes => {
+                    const tabla = document.getElementById("tabla-clientes");
+                    tabla.innerHTML = "";
+    
+                    clientes.forEach(c => {
+                        const fila = document.createElement("tr");
+                        fila.innerHTML = `
+                        <td>${c.cliente}</td>
+                        <td>${c.nss}</td>
+                        <td data-rfc="${c.rfc}" class="seleccionable">${c.rfc}</td>
+                    `;
+                    fila.addEventListener("click", () => {
+                        document.querySelectorAll("tr").forEach(f => f.classList.remove("seleccionado"));
+                        fila.classList.add("seleccionado");
+                        selectedRFC = c.rfc;
+                    });
 
-        // Ejemplo de generación dinámica de resultados
-        const clientes = [
-            { cliente: "Nombre completo 1", nss: "123456789", rfc: "ABC123456" },
-            { cliente: "Nombre completo 2", nss: "987654321", rfc: "XYZ987654" },
-        ];
-
-        function cargarTabla() {
-            const tabla = document.getElementById("tabla-clientes");
-            tabla.innerHTML = "";
-
-            clientes.forEach(cliente => {
-                const fila = document.createElement("tr");
-                fila.innerHTML = `
-                    <td>${cliente.cliente}</td>
-                    <td>${cliente.nss}</td>
-                    <td>${cliente.rfc}</td>
-                `;
-                tabla.appendChild(fila);
+                        tabla.appendChild(fila);
+                    });
+    
+                    document.getElementById("total-resultados").innerText = clientes.length;
+                });
+        }
+    
+        document.addEventListener("DOMContentLoaded", () => {
+            cargarClientes();
+    
+            document.getElementById("buscar").addEventListener("input", cargarClientes);
+            document.querySelectorAll('input[name="filter"]').forEach(radio => {
+                radio.addEventListener("change", cargarClientes);
             });
-
-            document.getElementById("total-resultados").innerText = clientes.length;
-        }
-
-        cargarTabla(); // Cargar datos al inicio
-    </script>
+        });
+    </script>    
 </body>
 </html>

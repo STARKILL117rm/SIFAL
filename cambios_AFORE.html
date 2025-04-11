@@ -110,15 +110,16 @@
             <button class="btn-retirar" onclick="retirarCliente()">Retirar</button>
             <button class="btn-agregar" onclick="agregarCliente()">Agregar</button>
         </div>
-        <div class="filters">
+        <form method="GET" class="filters">
             <label for="buscar">Ingrese NSS o RFC:</label>
-            <input type="text" id="buscar" placeholder="Buscar cliente...">
+            <input type="text" id="buscar" name="buscar" placeholder="Buscar cliente..." value="<?= $_GET['buscar'] ?? '' ?>">
             <div class="filter-options">
-                <label><input type="radio" name="filter" value="completadas"> Asesorías completadas</label>
-                <label><input type="radio" name="filter" value="afore"> Cambios de AFORE</label>
-                <label><input type="radio" name="filter" value="seguimiento"> En seguimiento</label>
+                <label><input type="radio" name="filter" value="completadas" <?= isset($_GET['filter']) && $_GET['filter'] === 'completadas' ? 'checked' : '' ?>> Asesorías completadas</label>
+                <label><input type="radio" name="filter" value="afore" <?= isset($_GET['filter']) && $_GET['filter'] === 'afore' ? 'checked' : '' ?>> Cambios de AFORE</label>
+                <label><input type="radio" name="filter" value="seguimiento" <?= isset($_GET['filter']) && $_GET['filter'] === 'seguimiento' ? 'checked' : '' ?>> En seguimiento</label>
             </div>
-        </div>
+            <button type="submit">Filtrar</button>
+        </form>        
         <div class="results">
             Total de resultados filtrados: <span id="total-resultados">0</span>
         </div>
@@ -129,11 +130,59 @@
                         <th>Cliente</th>
                         <th>NSS</th>
                         <th>RFC</th>
+                        <th>AFORE Anterior</th>
+                        <th>AFORE Nuevo</th>
+                        <th>Fecha de Cambio</th>
+                        <th>Estatus</th>
                     </tr>
                 </thead>
                 <tbody id="tabla-clientes">
-                    <!-- Filas dinámicas se agregarán aquí -->
-                </tbody>
+                <?php
+                    $conexion = new mysqli("localhost", "root", "", "sifal");
+                
+                    if ($conexion->connect_error) {
+                        die("Error de conexión: " . $conexion->connect_error);
+                    }
+                
+                    <?php
+                    $conexion = new mysqli("localhost", "root", "", "sifal");
+                    
+                    if ($conexion->connect_error) {
+                        die("Error de conexión: " . $conexion->connect_error);
+                    }
+                    
+                    $buscar = $_GET['buscar'] ?? '';
+                    $filtro = $_GET['filter'] ?? '';
+                    
+                    $sql = "SELECT nombre_cliente, nss, rfc, afore_anterior, afore_nuevo, fecha_cambio, estatus FROM afore WHERE 1=1";
+                    
+                    if ($buscar) {
+                        $sql .= " AND (rfc LIKE '%$buscar%' OR nss LIKE '%$buscar%')";
+                    }
+                    
+                    if ($filtro) {
+                        if ($filtro === 'completadas') {
+                            $sql .= " AND estatus = 'Completada'";
+                        } elseif ($filtro === 'afore') {
+                            $sql .= " AND afore_anterior != afore_nuevo";
+                        } elseif ($filtro === 'seguimiento') {
+                            $sql .= " AND estatus = 'En seguimiento'";
+                        }
+                    }
+                    
+                    $resultado = $conexion->query($sql);
+                    
+                    while ($row = $resultado->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>{$row['nombre_cliente']}</td>";
+                        echo "<td>{$row['nss']}</td>";
+                        echo "<td>{$row['rfc']}</td>";
+                        echo "</tr>";
+                    }
+                    
+                    $conexion->close();
+                    ?>                    
+                </tbody>                                   
             </table>
         </div>
     </div>
@@ -142,35 +191,19 @@
         function retirarCliente() {
             alert("Función de retiro aún no implementada.");
         }
-
+    
         function agregarCliente() {
             alert("Función de agregar aún no implementada.");
         }
-
-        // Ejemplo de generación dinámica de resultados
-        const clientes = [
-            { cliente: "Nombre completo 1", nss: "123456789", rfc: "ABC123456" },
-            { cliente: "Nombre completo 2", nss: "987654321", rfc: "XYZ987654" },
-        ];
-
-        function cargarTabla() {
-            const tabla = document.getElementById("tabla-clientes");
-            tabla.innerHTML = "";
-
-            clientes.forEach(cliente => {
-                const fila = document.createElement("tr");
-                fila.innerHTML = `
-                    <td>${cliente.cliente}</td>
-                    <td>${cliente.nss}</td>
-                    <td>${cliente.rfc}</td>
-                `;
-                tabla.appendChild(fila);
+    
+        // Evento para los filtros
+        document.querySelectorAll('input[name="filter"]').forEach(input => {
+            input.addEventListener('change', () => {
+                alert("Aquí filtrarías por: " + input.value);
+                // Aquí se puede hacer una consulta dinámica con fetch/ajax
             });
-
-            document.getElementById("total-resultados").innerText = clientes.length;
-        }
-
-        cargarTabla(); // Cargar datos al inicio
+        });
     </script>
+    
 </body>
 </html>

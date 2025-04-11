@@ -142,35 +142,45 @@
         function retirarCliente() {
             alert("Función de retiro aún no implementada.");
         }
-
+    
         function agregarCliente() {
             alert("Función de agregar aún no implementada.");
         }
-
-        // Datos de ejemplo de clientes
-        const clientes = [
-            { cliente: "Juan Pérez", nss: "123456789", rfc: "ABC123456" },
-            { cliente: "María López", nss: "987654321", rfc: "XYZ987654" },
-        ];
-
-        function cargarTabla() {
-            const tabla = document.getElementById("tabla-clientes");
-            tabla.innerHTML = "";
-
-            clientes.forEach(cliente => {
-                const fila = document.createElement("tr");
-                fila.innerHTML = `
-                    <td>${cliente.cliente}</td>
-                    <td>${cliente.nss}</td>
-                    <td>${cliente.rfc}</td>
-                `;
-                tabla.appendChild(fila);
-            });
-
-            document.getElementById("total-resultados").innerText = clientes.length;
+    
+        function cargarClientes() {
+            const buscar = document.getElementById("buscar").value;
+            const filtro = document.querySelector('input[name="filter"]:checked')?.value || "";
+    
+            fetch(`consultar_clientes.php?buscar=${encodeURIComponent(buscar)}&filtro=${encodeURIComponent(filtro)}`)
+                .then(response => response.json())
+                .then(clientes => {
+                    const tabla = document.getElementById("tabla-clientes");
+                    tabla.innerHTML = "";
+    
+                    clientes.forEach(c => {
+                        const fila = document.createElement("tr");
+                        fila.innerHTML = `
+                            <td>${c.cliente}</td>
+                            <td>${c.nss}</td>
+                            <td>${c.rfc}</td>
+                        `;
+                        tabla.appendChild(fila);
+                    });
+    
+                    document.getElementById("total-resultados").innerText = clientes.length;
+                });
         }
-
-        cargarTabla(); // Inicializa la tabla al cargar la página
-    </script>
+    
+        // Escuchar entrada de texto y filtros
+        document.addEventListener("DOMContentLoaded", function () {
+            cargarClientes();
+    
+            document.getElementById("buscar").addEventListener("input", cargarClientes);
+    
+            document.querySelectorAll('input[name="filter"]').forEach(radio => {
+                radio.addEventListener("change", cargarClientes);
+            });
+        });
+    </script>    
 </body>
 </html>
