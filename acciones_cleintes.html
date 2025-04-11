@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acciones del Cliente</title>
+    <link rel="icon" href="SIFAL.jpg" type="image/jpeg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 750px;
+            position: relative;
+            border: 2px solid black;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0;
+            margin-right: 10px;
+        }
+        .header img {
+            height: 28px; /* Ajusta la altura de la imagen al tamaño del texto */
+            width: auto;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .buttons button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #000000;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <button class="close-button" onclick="closeForm()">✖</button>
+        <div class="header">
+            <h1>Acciones del Cliente</h1>
+            <img src="Imagen SIFAL.jpg" alt="Icono de SIFAL">
+        </div>
+        <div class="buttons">
+            <button onclick="redirectTo('registrar_clientes.html')">Visualizar Citas Pendientes</button>
+            <button onclick="redirectTo('actualizar_informacion.html')">Filtrar Citas</button>
+            <button onclick="redirectTo('eliminar_cliente.html')">Ver estado de las Citas</button>
+        </div>
+    </div>
+
+    <script>
+        function closeForm() {
+            alert("Cerrando formulario...");
+        }
+
+        function redirectTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

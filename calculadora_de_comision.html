@@ -113,21 +113,39 @@
         }
 
         function saveData() {
-            const nombre = document.getElementById("nombre-cliente").value;
-            const montoRetirar = parseFloat(document.getElementById("monto-retirar").value);
-            const porcentajeComision = parseFloat(document.getElementById("porcentaje-comision").value);
+    const nombre = document.getElementById("nombre-cliente").value;
+    const montoRetirar = parseFloat(document.getElementById("monto-retirar").value);
+    const porcentajeComision = parseFloat(document.getElementById("porcentaje-comision").value);
 
-            if (!nombre || isNaN(montoRetirar) || isNaN(porcentajeComision)) {
-                alert("Por favor, completa todos los campos.");
-                return;
-            }
+    if (!nombre || isNaN(montoRetirar) || isNaN(porcentajeComision)) {
+        alert("Por favor, completa todos los campos.");
+        return;
+    }
 
-            const descuento = (montoRetirar * porcentajeComision) / 100;
-            const montoTotal = (montoRetirar - descuento).toFixed(2);
+    const descuento = (montoRetirar * porcentajeComision) / 100;
+    const montoTotal = (montoRetirar - descuento).toFixed(2);
+    document.getElementById("monto-total").innerText = `$${montoTotal}`;
 
-            document.getElementById("monto-total").innerText = `$${montoTotal}`;
+    const formData = new URLSearchParams();
+    formData.append("nombre", nombre);
+    formData.append("monto", montoRetirar);
+    formData.append("comision", porcentajeComision);
+    formData.append("monto_final", montoTotal);
+
+    fetch("guardar_comision.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: formData
+    })
+    .then(res => res.text())
+    .then(res => {
+        if (res === "ok") {
             alert("Datos guardados exitosamente.");
+        } else {
+            alert("Error al guardar los datos.");
         }
+    });
+}
     </script>
 </body>
 </html>
