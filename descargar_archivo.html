@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador de Pensión</title>
     <link rel="icon" href="SIFAL.jpg" type="image/jpeg">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script> <!-- Librería jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -119,30 +119,30 @@
         }
     
         function downloadPDF() {
-            const ingreso = document.getElementById("ingreso").value;
-            const anios = document.getElementById("anios").value;
-            const edad = document.getElementById("edad").value;
-            const monto = document.getElementById("pension-monto").innerText;
-    
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-    
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(16);
-            doc.text("Simulación de Pensión", 105, 20, { align: "center" });
-    
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(12);
-            doc.text(`Ingreso mensual promedio: $${ingreso}`, 20, 40);
-            doc.text(`Años cotizados: ${anios}`, 20, 50);
-            doc.text(`Edad estimada de retiro: ${edad}`, 20, 60);
-            doc.text(`Pensión estimada mensual: ${monto}`, 20, 80);
-    
-            doc.setFont("helvetica", "italic");
-            doc.text("Este cálculo es aproximado y puede variar según factores oficiales.", 20, 100);
-    
-            doc.save("simulacion_pension.pdf");
-        }
+    const ingreso = document.getElementById("ingreso").value;
+    const anios = document.getElementById("anios").value;
+    const edad = document.getElementById("edad").value;
+    const monto = document.getElementById("pension-monto").innerText;
+
+    const doc = new jsPDF(); // sin destructuración
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(16);
+    doc.text("Simulación de Pensión", 105, 20, { align: "center" });
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+    doc.text(`Ingreso mensual promedio: $${ingreso}`, 20, 40);
+    doc.text(`Años cotizados: ${anios}`, 20, 50);
+    doc.text(`Edad estimada de retiro: ${edad}`, 20, 60);
+    doc.text(`Pensión estimada mensual: ${monto}`, 20, 80);
+
+    doc.setFont("helvetica", "italic");
+    doc.text("Este cálculo es aproximado y puede variar según factores oficiales.", 20, 100);
+
+    doc.save("simulacion_pension.pdf");
+}
+
     
         function closeSimulator() {
             alert("Saliendo del simulador...");
