@@ -81,6 +81,7 @@
     <div class="simulator-container">
         <h1 class="simulator-title">Simulador de Pensión</h1>
         <form class="simulator-form">
+            <div id="resultado" style="margin-top: 20px; font-size: 20px; font-weight: bold; color: #007bff;"></div>
             <div class="form-group">
                 <label for="nombre">Nombre del cliente:</label>
                 <input type="text" id="nombre" placeholder="Ingrese nombre...">
@@ -128,28 +129,42 @@
             <button class="btn-cancelar" onclick="cancelarOperacion()">CANCELAR</button>
         </div>
     </div>
-
     <script>
-        function modificarDatos() {
-            alert("Función para modificar datos aún no implementada.");
+    function modificarDatos() {
+        alert("Función para modificar datos aún no implementada.");
+    }
+
+    function calcularPension() {
+        const nombre = document.getElementById("nombre").value;
+        const saldoAfore = parseFloat(document.getElementById("saldo-afore").value);
+        const salarioMensual = parseFloat(document.getElementById("salario-mensual").value);
+
+        if (!nombre || isNaN(saldoAfore) || isNaN(salarioMensual)) {
+            alert("Por favor, completa todos los campos correctamente.");
+            return;
         }
 
-        function calcularPension() {
-            const saldoAfore = parseFloat(document.getElementById("saldo-afore").value);
-            const salarioMensual = parseFloat(document.getElementById("salario-mensual").value);
+        const pensionEstimada = (saldoAfore * 0.04) + (salarioMensual * 0.2);
+        const resultado = document.getElementById("resultado");
+        resultado.innerText = `Hola ${nombre}, tu pensión estimada es: $${pensionEstimada.toFixed(2)} MXN`;
 
-            if (isNaN(saldoAfore) || isNaN(salarioMensual)) {
-                alert("Por favor, completa todos los campos correctamente.");
-                return;
-            }
+        fetch("guardar_simulacion.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `nombre=${encodeURIComponent(nombre)}&saldo=${saldoAfore}&salario=${salarioMensual}&pension=${pensionEstimada.toFixed(2)}`
+})
+.then(res => res.text())
+.then(msg => {
+    console.log("Guardado:", msg);
+});
 
-            const pensionEstimada = (saldoAfore * 0.04) + (salarioMensual * 0.2);
-            alert(`Pensión estimada: $${pensionEstimada.toFixed(2)} MXN`);
+    }
+
+    function cancelarOperacion() {
+        if (confirm("¿Deseas cancelar la operación?")) {
+            location.reload();
         }
-
-        function cancelarOperacion() {
-            alert("Operación cancelada.");
-        }
-    </script>
+    }
+</script>
 </body>
 </html>

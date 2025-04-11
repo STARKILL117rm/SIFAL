@@ -135,7 +135,8 @@
             </select>
         </div>
         <div class="buttons">
-            <button class="calculate" onclick="calculatePension()">CALCULAR</button>
+            <div id="resultado-pension" style="margin-top: 20px; text-align: center; font-size: 20px; font-weight: bold; color: #17a2b8;"></div>
+            <button class="calculate" onclick="calculateAndSave()">CALCULAR</button>
             <button class="reset" onclick="resetForm()">REINICIAR</button>
             <button class="cancel" onclick="redirectTo('acciones.html')">CANCELAR</button>
             <button class="edit" onclick="redirectTo('modificar_datos_de_simulacion.html')">EDITAR</button>
@@ -160,21 +161,53 @@
         }
 
         function calculatePension() {
-            const edad = parseInt(document.getElementById("edad").value);
-            const salario = parseFloat(document.getElementById("salario").value);
-            const saldoAfore = parseFloat(document.getElementById("saldo-afore").value);
-            const anioLey = parseInt(document.getElementById("anio-ley").value);
+    const edad = parseInt(document.getElementById("edad").value);
+    const salario = parseFloat(document.getElementById("salario").value);
+    const saldoAfore = parseFloat(document.getElementById("saldo-afore").value);
+    const anioLey = parseInt(document.getElementById("anio-ley").value);
+    const genero = document.getElementById("genero").value;
 
-            if (!edad || !salario || !saldoAfore || !anioLey) {
-                alert("Por favor, completa todos los campos.");
-                return;
-            }
+    if (isNaN(edad) || isNaN(salario) || isNaN(saldoAfore) || isNaN(anioLey) || !genero) {
+        alert("Por favor, completa todos los campos correctamente.");
+        return;
+    }
 
-            let pensionEstimada = (saldoAfore * 0.04) + (salario * 0.2);
-            pensionEstimada = pensionEstimada.toFixed(2);
+    // Fórmula estimada
+    let tasaPension = 0.04; // rendimiento anual del saldo
+    let tasaSalario = 0.2;  // 20% del salario mensual como base de apoyo
 
-            alert(`Pensión estimada: $${pensionEstimada} MXN`);
-        }
+    if (anioLey < 1997) {
+        tasaSalario += 0.1; // ley antigua, mayor beneficio
+    }
+
+    let pensionEstimada = (saldoAfore * tasaPension) + (salario * tasaSalario);
+    pensionEstimada = pensionEstimada.toFixed(2);
+
+    // Mostrar en pantalla
+    document.getElementById("resultado-pension").innerText = `Tu pensión estimada es: $${pensionEstimada} MXN`;
+}
+function calculateAndSave() {
+    calculatePension();
+
+    const edad = document.getElementById("edad").value;
+    const salario = document.getElementById("salario").value;
+    const saldo = document.getElementById("saldo-afore").value;
+    const anioLey = document.getElementById("anio-ley").value;
+    const genero = document.getElementById("genero").value;
+    const pensionTexto = document.getElementById("resultado-pension").innerText;
+    const pension = pensionTexto.match(/\$([\d,\.]+)/)?.[1]?.replace(/,/g, '') || "0";
+
+    fetch("guardar_simulacion.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `edad=${edad}&salario=${salario}&saldo=${saldo}&anioLey=${anioLey}&genero=${genero}&pension=${pension}`
+    })
+    .then(res => res.text())
+    .then(msg => {
+        console.log("Guardado:", msg);
+    });
+}
+
     </script>
 </body>
 </html>

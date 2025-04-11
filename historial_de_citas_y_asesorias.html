@@ -139,5 +139,37 @@
             </table>
         </div>
     </div>
+    <script>
+        const rfc = "ABC123456"; // aquí pondrías el RFC del cliente logueado (puede venir de sesión o URL)
+        
+        fetch(`historial_cliente.php?rfc=${rfc}`)
+          .then(response => response.json())
+          .then(data => {
+            // Cargar datos personales
+            const cliente = data.cliente;
+            const tablaInfo = document.querySelector(".section table");
+            tablaInfo.innerHTML = `
+              <tr><th>Nombre</th><td>${cliente.nombre} ${cliente.apellido_paterno} ${cliente.apellido_materno}</td></tr>
+              <tr><th>Edad</th><td>${cliente.edad}</td></tr>
+              <tr><th>Tipo de Régimen</th><td>${cliente.regimen}</td></tr>
+              <tr><th>NSS</th><td>${cliente.nss}</td></tr>
+              <tr><th>RFC</th><td>${cliente.rfc}</td></tr>
+            `;
+        
+            // Cargar historial de citas
+            const tbody = document.querySelector(".section + .section tbody");
+            tbody.innerHTML = "";
+        
+            data.citas.forEach(cita => {
+              const tr = document.createElement("tr");
+              tr.innerHTML = `
+                <td>${cita.fecha}</td>
+                <td>${cita.hora}</td>
+                <td>${cita.tipo_cita}</td>
+              `;
+              tbody.appendChild(tr);
+            });
+          });
+        </script>        
 </body>
 </html>

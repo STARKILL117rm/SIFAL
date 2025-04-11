@@ -130,5 +130,38 @@
             <p>AFORE ACTUAL: XXXXXXX &nbsp;&nbsp;&nbsp; AFORE ANTERIOR: XXXXXXX</p>
         </div>
     </div>
+    <script>
+        const clienteId = 1; // Reemplaza por el ID real del cliente (puede venir de sesión o input oculto)
+    
+        fetch(`obtener_traspasos.php?cliente_id=${clienteId}`)
+            .then(response => response.json())
+            .then(data => {
+                const tabla = document.createElement("table");
+                tabla.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>AFORE Anterior</th>
+                            <th>AFORE Actual</th>
+                            <th>Motivo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.map(t => `
+                            <tr>
+                                <td>${t.fecha_traspaso}</td>
+                                <td>${t.afore_anterior}</td>
+                                <td>${t.afore_actual}</td>
+                                <td>${t.motivo || 'N/A'}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                `;
+                document.querySelector(".container").appendChild(tabla);
+            })
+            .catch(err => {
+                console.error("Error al obtener el historial:", err);
+            });
+    </script>    
 </body>
 </html>

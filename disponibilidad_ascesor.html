@@ -102,24 +102,24 @@
         </div>
         <div class="form-container">
             <h2>Agendar Cita</h2>
-            <form>
+            <form action="ver_disponibilidad.php" method="POST">
                 <div class="form-group">
-                    <label for="fecha">Fecha:</label>
-                    <input type="date" id="fecha" required>
+                  <label for="fecha">Fecha:</label>
+                  <input type="date" id="fecha" name="fecha" required>
                 </div>
                 <div class="form-group">
-                    <label for="tipo-reunion">Tipo de Reunión:</label>
-                    <select id="tipo-reunion" required>
-                        <option value="asesoria">Asesoría</option>
-                        <option value="revision">Revisión de Documentos</option>
-                        <option value="otro">Otro</option>
-                    </select>
+                  <label for="tipo-reunion">Tipo de Reunión:</label>
+                  <select id="tipo-reunion" name="tipo_reunion" required>
+                    <option value="asesoria">Asesoría</option>
+                    <option value="revision">Revisión de Documentos</option>
+                    <option value="otro">Otro</option>
+                  </select>
                 </div>
                 <div class="form-buttons">
-                    <button type="button" class="btn-cancelar">Cancelar</button>
-                    <button type="submit" class="btn-guardar">Guardar</button>
+                  <button type="button" class="btn-cancelar">Cancelar</button>
+                  <button type="submit" class="btn-guardar">Guardar</button>
                 </div>
-            </form>
+              </form>              
         </div>
     </div>
 </body>

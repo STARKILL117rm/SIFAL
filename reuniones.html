@@ -88,7 +88,7 @@
             cursor: pointer;
         }
         .save { background-color: blue; }
-        .cancel { background-color: gray; }
+        .cancel { background-color: rgb(255, 0, 0); }
         .modify { background-color: green; }
     </style>
 </head>
@@ -102,6 +102,7 @@
         </div>
         <h2>Agendar cita</h2>
         <div class="meeting-form">
+            <input type="hidden" id="cliente" value="NOMBRE DEL CLIENTE">
             <label for="fecha">Fecha:</label>
             <input type="date" id="fecha">
             <label for="hora">Hora:</label>

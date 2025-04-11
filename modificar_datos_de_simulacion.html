@@ -105,6 +105,7 @@
 </head>
 <body>
     <div class="form-container">
+        <div id="resultado-pension" style="text-align:center; font-size: 20px; font-weight: bold; color: #17a2b8; margin-bottom: 20px;"></div>
         <button class="close-button" onclick="closeForm()">✖</button>
         <div class="header">
             <h1>Modificar Datos de Pensión</h1>
@@ -145,35 +146,57 @@
         function closeForm() {
             alert("Cerrando formulario...");
         }
-
+    
         function resetForm() {
             document.getElementById("edad").value = "";
             document.getElementById("salario").value = "";
             document.getElementById("saldo-afore").value = "";
             document.getElementById("anio-ley").value = "";
             document.getElementById("genero").value = "";
+            document.getElementById("resultado-pension").innerText = "";
         }
-
+    
         function redirectTo(page) {
             window.location.href = page;
         }
-
+    
         function calculatePension() {
             const edad = parseInt(document.getElementById("edad").value);
             const salario = parseFloat(document.getElementById("salario").value);
             const saldoAfore = parseFloat(document.getElementById("saldo-afore").value);
             const anioLey = parseInt(document.getElementById("anio-ley").value);
-
-            if (!edad || !salario || !saldoAfore || !anioLey) {
-                alert("Por favor, completa todos los campos.");
+            const genero = document.getElementById("genero").value;
+    
+            if (isNaN(edad) || isNaN(salario) || isNaN(saldoAfore) || isNaN(anioLey) || !genero) {
+                alert("Por favor, completa todos los campos correctamente.");
                 return;
             }
-
-            let pensionEstimada = (saldoAfore * 0.04) + (salario * 0.2);
+    
+            let tasaPension = 0.04;
+            let tasaSalario = 0.2;
+    
+            if (anioLey < 1997) {
+                tasaSalario += 0.1;
+            }
+    
+            let pensionEstimada = (saldoAfore * tasaPension) + (salario * tasaSalario);
             pensionEstimada = pensionEstimada.toFixed(2);
-
-            alert(`Pensión estimada: $${pensionEstimada} MXN`);
+    
+            // Mostrar resultado
+            document.getElementById("resultado-pension").innerText =
+                `Pensión estimada: $${pensionEstimada} MXN`;
+    
+            // Guardar en base de datos
+            fetch("guardar_simulacion.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `edad=${edad}&salario=${salario}&saldo=${saldoAfore}&anioLey=${anioLey}&genero=${genero}&pension=${pensionEstimada}`
+            })
+            .then(res => res.text())
+            .then(msg => {
+                console.log("Guardado:", msg);
+            });
         }
-    </script>
+    </script>    
 </body>
 </html>

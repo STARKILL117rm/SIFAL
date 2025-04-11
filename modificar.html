@@ -84,7 +84,7 @@
             cursor: pointer;
         }
         .save { background-color: #007bff; }
-        .cancel { background-color: #5c5c5c; }
+        .cancel { background-color: #ff0000; }
         .modify { background-color: #28a745; }
     </style>
 </head>
@@ -102,6 +102,13 @@
                 <label for="fecha">Fecha:</label>
                 <input type="date" id="fecha">
             </div>
+    <input type="hidden" id="idCita" value="123"> 
+
+    <select id="tipo">
+        <option value="Presencial">Presencial</option>
+        <option value="Virtual">Virtual</option>
+    </select>
+
             <div class="form-group">
                 <label for="hora">Hora:</label>
                 <input type="time" id="hora">
@@ -124,5 +131,34 @@
             </div>
         </div>
     </div>
+    <script>
+        document.querySelector('.modify').addEventListener('click', () => {
+            const idCita = document.getElementById('idCita').value;
+            const fecha = document.getElementById('fecha').value;
+            const hora = document.getElementById('hora').value;
+            const tipo = document.getElementById('tipo').value;
+            const descripcion = document.getElementById('descripcion').value;
+        
+            const formData = new FormData();
+            formData.append('idCita', idCita);
+            formData.append('fecha', fecha);
+            formData.append('hora', hora);
+            formData.append('tipo', tipo);
+            formData.append('descripcion', descripcion);
+        
+            fetch('modificar_cita.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(err => {
+                console.error('Error al modificar:', err);
+                alert('Hubo un error');
+            });
+        });
+        </script>        
 </body>
 </html>

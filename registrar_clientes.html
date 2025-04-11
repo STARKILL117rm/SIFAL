@@ -103,45 +103,58 @@
     <div class="form-container">
         <button class="close-button" onclick="closeForm()">✖</button>
         <div class="header">
-            <h1>Registrar Clientes</h1>
-            <img src="Imagen SIFAL.jpg" alt="Icono de SIFAL">
+          <h1>Registrar Clientes</h1>
+          <img src="Imagen SIFAL.jpg" alt="Icono de SIFAL">
         </div>
-        <div class="form-group">
-            <label for="nombre">Nombre del cliente:</label>
-            <input type="text" id="nombre" placeholder="Nombres...">
-        </div>
-        <div class="form-group">
-            <label for="apellido-paterno">Apellidos:</label>
-            <input type="text" id="apellido-paterno" placeholder="Paterno...">
-            <input type="text" id="apellido-materno" placeholder="Materno...">
-        </div>
-        <div class="form-group">
-            <label for="regimen">Tipo de Régimen:</label>
-            <select id="regimen">
-                <option>Persona Física</option>
-                <option>Persona Moral</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="rfc">RFC:</label>
-            <input type="text" id="rfc" placeholder="RFC...">
-        </div>
-        <div class="form-group">
-            <label for="nss">Número de Seguro Social (NSS):</label>
-            <input type="text" id="nss" placeholder="NSS...">
-        </div>
-        <div class="form-group">
-            <label for="afore">AFORE:</label>
-            <input type="text" id="afore" placeholder="AFORE...">
-        </div>
-        <div class="form-group">
-            <label for="telefono">Número de Teléfono:</label>
-            <input type="text" id="telefono" placeholder="Teléfono...">
-        </div>
-        <div class="form-group">
-            <label for="fecha-nacimiento">Fecha de nacimiento:</label>
-            <input type="date" id="fecha-nacimiento">
-        </div>
+      
+        <form action="registrar_cliente.php" method="POST">
+        </form>
+      </div>
+<form action="registrar_cliente.php" method="POST">
+    <div class="form-group">
+      <label for="nombre">Nombre del cliente:</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Nombres..." required>
+    </div>
+    <div class="form-group">
+      <label for="apellido-paterno">Apellidos:</label>
+      <input type="text" id="apellido_paterno" name="apellido_paterno" placeholder="Paterno..." required>
+      <input type="text" id="apellido_materno" name="apellido_materno" placeholder="Materno..." required>
+    </div>
+    <div class="form-group">
+      <label for="regimen">Tipo de Régimen:</label>
+      <select id="regimen" name="regimen">
+        <option>Persona Física</option>
+        <option>Persona Moral</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="rfc">RFC:</label>
+      <input type="text" id="rfc" name="rfc" placeholder="RFC..." required>
+    </div>
+    <div class="form-group">
+      <label for="nss">Número de Seguro Social (NSS):</label>
+      <input type="text" id="nss" name="nss" placeholder="NSS..." required>
+    </div>
+    <div class="form-group">
+      <label for="afore">AFORE:</label>
+      <input type="text" id="afore" name="afore" placeholder="AFORE..." required>
+    </div>
+    <div class="form-group">
+      <label for="telefono">Número de Teléfono:</label>
+      <input type="text" id="telefono" name="telefono" placeholder="Teléfono..." required>
+    </div>
+    <div class="form-group">
+      <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+      <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+    </div>
+  
+    <div class="buttons">
+      <button class="update" type="button" onclick="redirectTo('acutualizar_info.html')">ACTUALIZAR</button>
+      <button class="save" type="submit">GUARDAR</button>
+      <button class="cancel" type="button" onclick="redirectTo('acciones.html')">CANCELAR</button>
+    </div>
+  </form>
+  
 
         <div class="buttons">
             <button class="update" onclick="redirectTo('acutualizar_info.html')">ACTUALIZAR</button>
