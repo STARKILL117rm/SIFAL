@@ -104,23 +104,30 @@
             <button class="btn-consultar">Consultar mis datos</button>
             <button class="btn-agendar">Agendar cita o Cambiar la fecha</button>
         </div>
-        <div class="appointment-settings">
-            <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha">
-            <label for="hora">Hora:</label>
-            <input type="time" id="hora">
-            <label for="tipo-reunion">Seleccione el tipo de reunión:</label>
-            <select id="tipo-reunion">
-                <option value="asesoria">Asesoría</option>
-                <option value="revision">Revisión de documentos</option>
-                <option value="otro">Otro</option>
-            </select>
-        </div>
-        <div class="actions">
-            <button class="btn-modificar">MODIFICAR</button>
-            <button class="btn-cancelar">CANCELAR</button>
-            <button class="btn-guardar">GUARDAR</button>
-        </div>
+        <form action="agendar_cita.php" method="POST">
+            <input type="hidden" name="rfc" value="ABC123456"> <!-- Cambia esto dinámicamente -->
+          
+            <div class="appointment-settings">
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="fecha" required>
+          
+                <label for="hora">Hora:</label>
+                <input type="time" id="hora" name="hora" required>
+          
+                <label for="tipo-reunion">Seleccione el tipo de reunión:</label>
+                <select id="tipo-reunion" name="tipo_reunion" required>
+                    <option value="asesoria">Asesoría</option>
+                    <option value="revision">Revisión de documentos</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+          
+            <div class="actions">
+                <button type="button" class="btn-modificar">MODIFICAR</button>
+                <button type="reset" class="btn-cancelar">CANCELAR</button>
+                <button type="submit" class="btn-guardar">GUARDAR</button>
+            </div>
+          </form>          
     </div>
 </body>
 </html>
